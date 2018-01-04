@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:text="@{book.title}"
             tools:text="The Colour of Magic" />
 
         <TextView
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:text="@{book.author}"
             tools:text="Terry Pratchett" />
 
     </LinearLayout>

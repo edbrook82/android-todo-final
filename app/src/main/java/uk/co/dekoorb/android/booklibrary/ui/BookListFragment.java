@@ -36,19 +36,8 @@ public class BookListFragment extends Fragment {
 
     public static BookListFragment newInstance() {
         BookListFragment fragment = new BookListFragment();
-//        Bundle args = new Bundle();
-//        args.putString(KEY_NAME, arg1);
-//        fragment.setArguments(args);
         return fragment;
     }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mNameArg = getArguments().getString(KEY_NAME, KEY_NAME_DEFAULT);
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,10 +74,6 @@ public class BookListFragment extends Fragment {
         });
     }
 
-    // Does this need moving elsewhere? - thinking it should stay but pass clicks to parent (see below)
-    // Should it pass clicks to the ViewModel to handle - if it directly affects data, probably?
-    // If the click should open a new activity, then the parent activity should handle it.
-    // If the click opens a dialog - who/what should handle creating / displaying dialog????
     private final BookClickCallback mBookClickCallback = new BookClickCallback() {
         @Override
         public void onClick(Book book) {
