@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.archtest.db.entity;
+package uk.co.dekoorb.android.booklibrary.db.entity;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

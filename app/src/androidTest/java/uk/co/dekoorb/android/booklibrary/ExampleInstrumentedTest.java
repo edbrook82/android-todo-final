@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.archtest;
+package uk.co.dekoorb.android.booklibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("uk.co.dekoorb.android.archtest", appContext.getPackageName());
+        assertEquals("uk.co.dekoorb.android.booklibrary", appContext.getPackageName());
     }
 }

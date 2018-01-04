@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.archtest.db.dao;
+package uk.co.dekoorb.android.booklibrary.db.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -9,7 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import uk.co.dekoorb.android.archtest.db.entity.Book;
+import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 
 /**
  * Created by ed on 04/01/18.
@@ -27,11 +27,11 @@ public interface BookDao {
     LiveData<List<Book>> getBooksRead();
 
     @Insert
-    void addBook(Book book);
+    void addBooks(Book... books);
 
     @Update
-    void updateBook(Book book);
+    void updateBooks(Book... books);
 
     @Delete
-    void deleteBook(Book book);
+    void deleteBooks(Book... books);
 }

@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.archtest;
+package uk.co.dekoorb.android.booklibrary;
 
 import org.junit.Test;
 
