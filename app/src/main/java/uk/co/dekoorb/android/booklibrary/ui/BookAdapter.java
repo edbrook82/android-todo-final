@@ -17,6 +17,11 @@ import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> mBookList;
+    private BookClickCallback mBookClickCallback;
+
+    public BookAdapter(BookClickCallback callback) {
+        mBookClickCallback = callback;
+    }
 
     public void setBookList(List<Book> bookList) {
         mBookList = bookList;

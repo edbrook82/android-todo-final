@@ -10,17 +10,17 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "books")
 public class Book {
     @PrimaryKey(autoGenerate = true)
-    private String id;
+    private long id;
     private String title;
     private String author;
     private String description;
     private boolean hasRead;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

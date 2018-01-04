@@ -24,7 +24,7 @@ public class BaseApp extends Application {
     }
 
     private void createDb() {
-        mDb = Room.databaseBuilder(getApplicationContext(),
+        mDb = Room.databaseBuilder(this,
                 AppDatabase.class, DATABASE_NAME).build();
     }
 }
