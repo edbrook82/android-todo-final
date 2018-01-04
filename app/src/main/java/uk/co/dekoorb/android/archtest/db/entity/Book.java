@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "books")
 public class Book {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private String id;
     private String title;
     private String author;
