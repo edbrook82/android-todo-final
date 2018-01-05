@@ -35,7 +35,7 @@ public class BookListFragment extends Fragment {
 
     private BookAdapter mBookAdapter;
     private BookListFragmentBinding mBinding;
-    private BookListViewModel bookListViewModel;
+    private BookListViewModel mViewModel;
 
     private OnBookSelectedListener mBookSelectionListener;
 
@@ -67,7 +67,7 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBookAdapter = new BookAdapter(mBookClickCallback);
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.book_list_fragment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_list, container, false);
         mBinding.setIsLoading(true);
         mBinding.booksList.setAdapter(mBookAdapter);
         return mBinding.getRoot();
@@ -77,10 +77,9 @@ public class BookListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        bookListViewModel =
-                ViewModelProviders.of(this).get(BookListViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
 
-        subscribeUI(bookListViewModel);
+        subscribeUI(mViewModel);
     }
 
     private void subscribeUI(BookListViewModel viewModel) {
@@ -112,7 +111,7 @@ public class BookListFragment extends Fragment {
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            bookListViewModel.deleteBook(book);
+                            mViewModel.deleteBook(book);
                         }
                     })
                     .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -135,7 +134,7 @@ public class BookListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                bookListViewModel.addClicked();
+                mViewModel.addClicked();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

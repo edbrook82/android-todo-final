@@ -7,4 +7,5 @@
     <string name="delete_book">Delete Book?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="book_has_been_read">book has been read</string>
 </resources>

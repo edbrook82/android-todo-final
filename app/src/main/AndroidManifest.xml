@@ -13,11 +13,12 @@
         <activity android:name=".ui.BookListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BookDetailActivity"></activity>
+        <activity android:name=".ui.BookDetailActivity"
+            android:parentActivityName=".ui.BookListActivity">
+        </activity>
     </application>
 
 </manifest>

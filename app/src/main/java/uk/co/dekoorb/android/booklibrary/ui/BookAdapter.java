@@ -32,7 +32,7 @@ class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         BookListItemBinding itemBinding = DataBindingUtil
-                .inflate(LayoutInflater.from(parent.getContext()), R.layout.book_list_item,
+                .inflate(LayoutInflater.from(parent.getContext()), R.layout.list_item_book,
                         parent, false);
         return new BookViewHolder(itemBinding, mBookClickCallback);
     }
