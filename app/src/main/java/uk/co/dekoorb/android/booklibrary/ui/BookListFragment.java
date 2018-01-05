@@ -11,9 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -45,7 +42,7 @@ public class BookListFragment extends Fragment {
 
     public BookListFragment() {
         // Required empty public constructor
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
     }
 
     public static BookListFragment newInstance() {
@@ -69,6 +66,7 @@ public class BookListFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.book_list_fragment, container, false);
         mBinding.setIsLoading(true);
         mBinding.booksList.setAdapter(mBookAdapter);
+        mBinding.fabAdd.setOnClickListener(fabAddListener);
         return mBinding.getRoot();
     }
 
@@ -122,20 +120,26 @@ public class BookListFragment extends Fragment {
         }
     };
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.book_list_menu, menu);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.book_list_menu, menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.:
+//                break;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//        return false;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                mViewModel.addClicked();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+    private final View.OnClickListener fabAddListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mViewModel.addClicked();
         }
-        return false;
-    }
+    };
 }

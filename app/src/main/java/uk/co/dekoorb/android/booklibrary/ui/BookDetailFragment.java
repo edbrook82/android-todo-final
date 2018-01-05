@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class BookDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.book_detail_fragment, container, false);
+        mBinding.fabEdit.setOnClickListener(fabEditListener);
         return mBinding.getRoot();
     }
 
@@ -81,4 +83,11 @@ public class BookDetailFragment extends Fragment {
             }
         });
     }
+
+    private View.OnClickListener fabEditListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "fabEditOnClick:" + mBookId);
+        }
+    };
 }
