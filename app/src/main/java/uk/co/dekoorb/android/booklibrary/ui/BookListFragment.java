@@ -1,13 +1,19 @@
 package uk.co.dekoorb.android.booklibrary.ui;
 
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,14 +35,32 @@ public class BookListFragment extends Fragment {
 
     private BookAdapter mBookAdapter;
     private BookListFragmentBinding mBinding;
+    private BookListViewModel bookListViewModel;
+
+    private OnBookSelectedListener mBookSelectionListener;
+
+    public interface OnBookSelectedListener {
+        void onBookSelected(Book book);
+    }
 
     public BookListFragment() {
         // Required empty public constructor
+        setHasOptionsMenu(true);
     }
 
     public static BookListFragment newInstance() {
         BookListFragment fragment = new BookListFragment();
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mBookSelectionListener = (OnBookSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnBookSelectedListener");
+        }
     }
 
     @Override
@@ -53,7 +77,7 @@ public class BookListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final BookListViewModel bookListViewModel =
+        bookListViewModel =
                 ViewModelProviders.of(this).get(BookListViewModel.class);
 
         subscribeUI(bookListViewModel);
@@ -77,13 +101,45 @@ public class BookListFragment extends Fragment {
     private final BookClickCallback mBookClickCallback = new BookClickCallback() {
         @Override
         public void onClick(Book book) {
-
+            mBookSelectionListener.onBookSelected(book);
         }
 
         @Override
-        public void onLongClick(Book book) {
-
+        public void onLongClick(final Book book) {
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.delete_book)
+                    .setMessage(book.getTitle())
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            bookListViewModel.deleteBook(book);
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User cancelled
+                        }
+                    })
+                    .create()
+                    .show();
         }
     };
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.book_list_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                bookListViewModel.addClicked();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
+    }
 }

@@ -3,6 +3,7 @@ package uk.co.dekoorb.android.booklibrary.ui;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -15,26 +16,17 @@ import uk.co.dekoorb.android.booklibrary.db.entity.Book;
  * Created by ed on 04/01/18.
  */
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
+class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> mBookList;
     private BookClickCallback mBookClickCallback;
 
-    public BookAdapter(BookClickCallback callback) {
+    BookAdapter(BookClickCallback callback) {
         mBookClickCallback = callback;
     }
 
-    public void setBookList(List<Book> bookList) {
+    void setBookList(List<Book> bookList) {
         mBookList = bookList;
         notifyDataSetChanged();
-//        Should ideally use something like this instead for performance improvement
-//        if (mBookList == null) {
-//            mBookList = bookList;
-//            notifyItemRangeChanged(0, bookList.size());
-//        } else {
-//            DiffUtil.DiffResult result = DiffUtil.calculateDiff(...);
-//            mBookList = bookList;
-//            result.dispatchUpdatesTo(this);
-//        }
     }
 
     @Override
@@ -42,7 +34,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         BookListItemBinding itemBinding = DataBindingUtil
                 .inflate(LayoutInflater.from(parent.getContext()), R.layout.book_list_item,
                         parent, false);
-        return new BookViewHolder(itemBinding);
+        return new BookViewHolder(itemBinding, mBookClickCallback);
     }
 
     @Override
@@ -56,12 +48,29 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return mBookList == null ? 0 : mBookList.size();
     }
 
-    static class BookViewHolder extends RecyclerView.ViewHolder {
-        private BookListItemBinding mBinding;
+    static class BookViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
-        BookViewHolder(BookListItemBinding itemBinding) {
+        private BookListItemBinding mBinding;
+        private BookClickCallback mCallback;
+
+        BookViewHolder(BookListItemBinding itemBinding, BookClickCallback clickCallback) {
             super(itemBinding.getRoot());
+            mCallback = clickCallback;
             mBinding = itemBinding;
+            mBinding.bookListItem.setOnClickListener(this);
+            mBinding.bookListItem.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mCallback.onClick(mBinding.getBook());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mCallback.onLongClick(mBinding.getBook());
+            return true;
         }
     }
 }

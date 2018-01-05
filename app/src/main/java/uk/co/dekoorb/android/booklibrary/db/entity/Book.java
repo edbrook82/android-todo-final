@@ -55,4 +55,9 @@ public class Book {
     public void setRead(boolean hasRead) {
         this.hasRead = hasRead;
     }
+
+    @Override
+    public String toString() {
+        return id + "-" + title;
+    }
 }

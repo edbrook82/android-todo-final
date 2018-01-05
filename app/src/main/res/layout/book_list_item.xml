@@ -9,6 +9,7 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/book_list_item"
         android:orientation="vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"

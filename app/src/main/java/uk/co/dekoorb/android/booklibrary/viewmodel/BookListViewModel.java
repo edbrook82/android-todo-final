@@ -3,6 +3,7 @@ package uk.co.dekoorb.android.booklibrary.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.os.AsyncTask;
 
 import java.util.List;
 
@@ -28,5 +29,30 @@ public class BookListViewModel extends AndroidViewModel {
 
     public LiveData<List<Book>> getBooksList() {
         return this.mBookList;
+    }
+
+    public void addClicked() {
+        final Book book = new Book();
+        book.setTitle("The Colour of Magic");
+        book.setAuthor("Terry Pratchett");
+        book.setDescription("The story takes place on the Discworld, a planet-sized flat disc carried through space on the backs of four huge elephants – Berilia, Tubul, Great T'Phon and Jerakeen – who themselves stand on the shell of Great A'Tuin, a gigantic sea turtle. The surface of the disc contains oceans and continents, and with them, civilisations, cities, forests and mountains.");
+
+        new AsyncTask<Book, Void, Void>() {
+            @Override
+            protected Void doInBackground(Book... params) {
+                mDb.bookDao().addBooks(book);
+                return null;
+            }
+        }.execute(book);
+    }
+
+    public void deleteBook(final Book book) {
+        new AsyncTask<Book, Void, Void>() {
+            @Override
+            protected Void doInBackground(Book... params) {
+                mDb.bookDao().deleteBooks(book);
+                return null;
+            }
+        }.execute(book);
     }
 }
