@@ -33,24 +33,25 @@ public class BookListViewModel extends AndroidViewModel {
 
     public void addClicked() {
         final Book book = new Book();
-        book.setTitle("The Colour of Magic");
+        book.setRead(Math.random() >= 0.5);
+        book.setTitle("The Colour of Magic - " + (int)(Math.random()*1000));
         book.setAuthor("Terry Pratchett");
         book.setDescription("The story takes place on the Discworld, a planet-sized flat disc carried through space on the backs of four huge elephants – Berilia, Tubul, Great T'Phon and Jerakeen – who themselves stand on the shell of Great A'Tuin, a gigantic sea turtle. The surface of the disc contains oceans and continents, and with them, civilisations, cities, forests and mountains.");
 
         new AsyncTask<Book, Void, Void>() {
             @Override
-            protected Void doInBackground(Book... params) {
-                mDb.bookDao().addBooks(book);
+            protected Void doInBackground(Book... books) {
+                mDb.bookDao().addBooks(books[0]);
                 return null;
             }
         }.execute(book);
     }
 
-    public void deleteBook(final Book book) {
+    public void deleteBook(Book book) {
         new AsyncTask<Book, Void, Void>() {
             @Override
-            protected Void doInBackground(Book... params) {
-                mDb.bookDao().deleteBooks(book);
+            protected Void doInBackground(Book... books) {
+                mDb.bookDao().deleteBooks(books[0]);
                 return null;
             }
         }.execute(book);

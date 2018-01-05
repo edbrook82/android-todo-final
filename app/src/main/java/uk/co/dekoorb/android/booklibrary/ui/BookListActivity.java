@@ -1,8 +1,8 @@
 package uk.co.dekoorb.android.booklibrary.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
@@ -27,6 +27,8 @@ public class BookListActivity extends AppCompatActivity
 
     @Override
     public void onBookSelected(Book book) {
-        Log.d(TAG, "onBookSelected: " + book);
+        long bookId = book.getId();
+        Intent detailIntent = BookDetailActivity.getIntent(this, bookId);
+        startActivity(detailIntent);
     }
 }

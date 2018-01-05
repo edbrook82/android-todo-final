@@ -1,6 +1,9 @@
 package uk.co.dekoorb.android.booklibrary.ui;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import uk.co.dekoorb.android.booklibrary.R;
+import uk.co.dekoorb.android.booklibrary.databinding.BookDetailFragmentBinding;
+import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 import uk.co.dekoorb.android.booklibrary.viewmodel.BookDetailViewModel;
 
 /**
@@ -21,8 +26,9 @@ public class BookDetailFragment extends Fragment {
 
     private static final String ARG_BOOK_ID = "book_id";
 
-    private int mBookId;
+    private long mBookId;
     private BookDetailViewModel mViewModel;
+    private BookDetailFragmentBinding mBinding;
 
     public BookDetailFragment() {
         // Required empty public constructor
@@ -35,10 +41,10 @@ public class BookDetailFragment extends Fragment {
      * @param bookId Id of the book to display.
      * @return A new instance of fragment BookDetailFragment.
      */
-    public static BookDetailFragment newInstance(int bookId) {
+    public static BookDetailFragment newInstance(long bookId) {
         BookDetailFragment fragment = new BookDetailFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_BOOK_ID, bookId);
+        args.putLong(ARG_BOOK_ID, bookId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,19 +53,32 @@ public class BookDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mBookId = getArguments().getInt(ARG_BOOK_ID);
+            mBookId = getArguments().getLong(ARG_BOOK_ID);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_detail, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.book_detail_fragment, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(BookDetailViewModel.class);
+        subscribeUI();
+    }
+
+    private void subscribeUI() {
+        mViewModel.getBook(mBookId).observe(this, new Observer<Book>() {
+            @Override
+            public void onChanged(@Nullable Book book) {
+                if (book != null) {
+                    mBinding.setBook(book);
+                }
+            }
+        });
     }
 }

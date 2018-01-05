@@ -1,7 +1,9 @@
 package uk.co.dekoorb.android.booklibrary.ui;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import uk.co.dekoorb.android.booklibrary.R;
 
@@ -9,13 +11,19 @@ public class BookDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_BOOK_ID = "BookDetailActivity.EXTRA_BOOK_ID";
 
+    public static Intent getIntent(Context context, long bookId) {
+        Intent intent = new Intent(context, BookDetailActivity.class);
+        intent.putExtra(EXTRA_BOOK_ID, bookId);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
         if (savedInstanceState == null) {
-            int bookId = getIntent().getIntExtra(EXTRA_BOOK_ID, -1);
+            long bookId = getIntent().getLongExtra(EXTRA_BOOK_ID, -1);
             if (bookId != -1) {
                 BookDetailFragment fragment = BookDetailFragment.newInstance(bookId);
                 getSupportFragmentManager().beginTransaction()

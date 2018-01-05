@@ -49,8 +49,7 @@ public class BookListFragment extends Fragment {
     }
 
     public static BookListFragment newInstance() {
-        BookListFragment fragment = new BookListFragment();
-        return fragment;
+        return new BookListFragment();
     }
 
     @Override
@@ -67,7 +66,7 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBookAdapter = new BookAdapter(mBookClickCallback);
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_list, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.book_list_fragment, container, false);
         mBinding.setIsLoading(true);
         mBinding.booksList.setAdapter(mBookAdapter);
         return mBinding.getRoot();
@@ -76,14 +75,12 @@ public class BookListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         mViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
-
-        subscribeUI(mViewModel);
+        subscribeUI();
     }
 
-    private void subscribeUI(BookListViewModel viewModel) {
-        viewModel.getBooksList().observe(this, new Observer<List<Book>>() {
+    private void subscribeUI() {
+        mViewModel.getBooksList().observe(this, new Observer<List<Book>>() {
             @Override
             public void onChanged(@Nullable List<Book> books) {
                 if (books != null) {

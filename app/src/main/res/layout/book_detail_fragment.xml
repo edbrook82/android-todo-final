@@ -35,6 +35,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@{book.author}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/book_title"
             tools:text="Author" />
@@ -49,6 +50,7 @@
             android:layout_marginTop="16dp"
             android:text="@{book.description}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
