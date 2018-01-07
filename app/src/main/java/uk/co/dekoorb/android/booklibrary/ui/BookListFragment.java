@@ -34,10 +34,11 @@ public class BookListFragment extends Fragment {
     private BookListFragmentBinding mBinding;
     private BookListViewModel mViewModel;
 
-    private OnBookSelectedListener mBookSelectionListener;
+    private BookListActionsListener mListener;
 
-    public interface OnBookSelectedListener {
+    public interface BookListActionsListener {
         void onBookSelected(Book book);
+        void onAddBookClicked();
     }
 
     public BookListFragment() {
@@ -53,9 +54,9 @@ public class BookListFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mBookSelectionListener = (OnBookSelectedListener) context;
+            mListener = (BookListActionsListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnBookSelectedListener");
+            throw new ClassCastException(context.toString() + " must implement BookListActionsListener");
         }
     }
 
@@ -95,7 +96,7 @@ public class BookListFragment extends Fragment {
     private final BookClickCallback mBookClickCallback = new BookClickCallback() {
         @Override
         public void onClick(Book book) {
-            mBookSelectionListener.onBookSelected(book);
+            mListener.onBookSelected(book);
         }
 
         @Override
@@ -139,7 +140,7 @@ public class BookListFragment extends Fragment {
     private final View.OnClickListener fabAddListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mViewModel.addClicked();
+            mListener.onAddBookClicked();
         }
     };
 }
