@@ -40,7 +40,7 @@ public class AddBookDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AddBookDialogViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity()).get(AddBookDialogViewModel.class);
         mBinding.setBook(mViewModel.getBook());
     }
 

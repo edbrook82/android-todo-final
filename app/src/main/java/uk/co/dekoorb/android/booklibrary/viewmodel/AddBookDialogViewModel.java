@@ -14,7 +14,7 @@ import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 
 public class AddBookDialogViewModel extends AndroidViewModel {
     private final AppDatabase mDb;
-    private final Book mBook;
+    private Book mBook;
 
     public AddBookDialogViewModel(Application app) {
         super(app);
@@ -41,6 +41,7 @@ public class AddBookDialogViewModel extends AndroidViewModel {
             }
         }.execute(mBook);
 
+        mBook = new Book();
         return true;
     }
 }
