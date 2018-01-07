@@ -100,7 +100,7 @@ public class BookDetailPagerFragment extends Fragment {
                     }
                     Log.d(TAG, "onChanged: pos=" + mCurrentBook);
                     mPagerAdapter.setBooksList(books);
-                    mBinding.bookViewpager.setCurrentItem(mCurrentBook);
+                    mBinding.bookViewpager.setCurrentItem(mCurrentBook, false);
                 }
             }
         });
