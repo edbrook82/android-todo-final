@@ -4,24 +4,27 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
+import java.util.List;
+
 import uk.co.dekoorb.android.booklibrary.BaseApp;
 import uk.co.dekoorb.android.booklibrary.db.AppDatabase;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 
-
 /**
- * Created by ed on 05/01/18.
+ * Created by edbrook on 07/01/2018.
  */
 
-public class BookDetailViewModel extends AndroidViewModel {
+public class BookDetailPagerViewModel extends AndroidViewModel {
     private final AppDatabase mDb;
+    private final LiveData<List<Book>> mBookList;
 
-    public BookDetailViewModel(Application app) {
+    public BookDetailPagerViewModel(Application app) {
         super(app);
         mDb = ((BaseApp) app).getAppDb();
+        mBookList = mDb.bookDao().getAllBooks();
     }
 
-    public LiveData<Book> getBook(long id) {
-        return mDb.bookDao().getBook(id);
+    public LiveData<List<Book>> getBooksList() {
+        return this.mBookList;
     }
 }

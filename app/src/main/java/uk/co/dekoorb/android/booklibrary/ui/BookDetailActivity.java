@@ -25,7 +25,8 @@ public class BookDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             long bookId = getIntent().getLongExtra(EXTRA_BOOK_ID, -1);
             if (bookId != -1) {
-                BookDetailFragment fragment = BookDetailFragment.newInstance(bookId);
+//                BookDetailFragment fragment = BookDetailFragment.newInstance(bookId);
+                BookDetailPagerFragment fragment = BookDetailPagerFragment.newInstance(bookId);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.book_detail_frame, fragment, BookDetailFragment.TAG)
                         .commit();
