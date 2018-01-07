@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -9,30 +10,47 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/book_list_item"
-        android:orientation="vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp">
 
-        <TextView
-            android:id="@+id/book_title"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/book_list_item"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{book.title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            tools:text="The Colour of Magic" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/book_author"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/book_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{book.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="The Colour of Magic" />
+
+            <TextView
+                android:id="@+id/book_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{book.author}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:text="Terry Pratchett" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/book_has_read"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:text="@{book.author}"
-            tools:text="Terry Pratchett" />
+            android:layout_gravity="center"
+            android:contentDescription="@string/book_has_been_read"
+            app:srcCompat="@drawable/ic_check_black_24dp"
+            app:visibleInvisible="@{book.read}" />
 
     </LinearLayout>
+
 </layout>

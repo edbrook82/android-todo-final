@@ -29,12 +29,11 @@ public class AddBookDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mBinding = DataBindingUtil.inflate(inflater, R.layout.add_book_dialog, null, false);
-        Dialog dialog = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.add_book_dialog_title)
                 .setView(mBinding.getRoot())
                 .setPositiveButton(R.string.save, onSaveListener)
                 .create();
-        return dialog;
     }
 
     @Override
