@@ -16,7 +16,7 @@ import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 public class BookDetailViewModel extends AndroidViewModel {
     private final AppDatabase mDb;
 
-    BookDetailViewModel(Application app) {
+    public BookDetailViewModel(Application app) {
         super(app);
         mDb = ((BaseApp) app).getAppDb();
     }
