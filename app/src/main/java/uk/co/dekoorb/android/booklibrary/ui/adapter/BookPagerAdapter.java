@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.booklibrary.ui;
+package uk.co.dekoorb.android.booklibrary.ui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
+import uk.co.dekoorb.android.booklibrary.ui.BookDetailFragment;
 
 /**
  * Created by edbrook on 07/01/2018.
@@ -14,7 +15,7 @@ import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 
 public class BookPagerAdapter extends FragmentStatePagerAdapter {
 
-    List<Book> mBooks;
+    private List<Book> mBooks;
 
     public BookPagerAdapter(FragmentManager fm) {
         super(fm);

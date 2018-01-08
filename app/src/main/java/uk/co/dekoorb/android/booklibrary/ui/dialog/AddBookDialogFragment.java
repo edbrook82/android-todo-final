@@ -13,6 +13,7 @@ import android.view.View;
 
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.AddBookDialogBinding;
+import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 import uk.co.dekoorb.android.booklibrary.viewmodel.AddBookDialogViewModel;
 
 /**
@@ -33,6 +34,7 @@ public class AddBookDialogFragment extends DialogFragment {
                 .setMessage(R.string.add_book_dialog_title)
                 .setView(mBinding.getRoot())
                 .setPositiveButton(R.string.save, onSaveListener)
+                .setNegativeButton(R.string.cancel, onCancelListener)
                 .create();
     }
 
@@ -40,6 +42,9 @@ public class AddBookDialogFragment extends DialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(AddBookDialogViewModel.class);
+        if (savedInstanceState == null) {
+            mViewModel.reset();
+        }
         mBinding.setBook(mViewModel.getBook());
     }
 
@@ -47,6 +52,13 @@ public class AddBookDialogFragment extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             mViewModel.addClicked();
+        }
+    };
+
+    private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            mViewModel.reset();
         }
     };
 }

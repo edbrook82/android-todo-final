@@ -26,6 +26,10 @@ public class AddBookDialogViewModel extends AndroidViewModel {
         return mBook;
     }
 
+    public void reset() {
+        mBook = new Book();
+    }
+
     public boolean addClicked() {
         new AsyncTask<Book, Void, Void>() {
             @Override
@@ -35,7 +39,7 @@ public class AddBookDialogViewModel extends AndroidViewModel {
             }
         }.execute(mBook);
 
-        mBook = new Book();
+        reset();
         return true;
     }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.BookDetailPagerFragmentBinding;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
+import uk.co.dekoorb.android.booklibrary.ui.adapter.BookPagerAdapter;
 import uk.co.dekoorb.android.booklibrary.viewmodel.BookDetailPagerViewModel;
 
 /**

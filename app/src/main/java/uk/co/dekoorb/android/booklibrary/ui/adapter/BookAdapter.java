@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.booklibrary.ui;
+package uk.co.dekoorb.android.booklibrary.ui.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -11,20 +11,21 @@ import java.util.List;
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.BookListItemBinding;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
+import uk.co.dekoorb.android.booklibrary.ui.BookClickCallback;
 
 /**
  * Created by ed on 04/01/18.
  */
 
-class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> mBookList;
     private BookClickCallback mBookClickCallback;
 
-    BookAdapter(BookClickCallback callback) {
+    public BookAdapter(BookClickCallback callback) {
         mBookClickCallback = callback;
     }
 
-    void setBookList(List<Book> bookList) {
+    public void setBookList(List<Book> bookList) {
         mBookList = bookList;
         notifyDataSetChanged();
     }

@@ -19,6 +19,7 @@ import java.util.List;
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.BookListFragmentBinding;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
+import uk.co.dekoorb.android.booklibrary.ui.adapter.BookAdapter;
 import uk.co.dekoorb.android.booklibrary.viewmodel.BookListViewModel;
 
 /**

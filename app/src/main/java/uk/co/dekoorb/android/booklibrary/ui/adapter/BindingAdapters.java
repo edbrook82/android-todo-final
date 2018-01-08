@@ -1,4 +1,4 @@
-package uk.co.dekoorb.android.booklibrary.ui;
+package uk.co.dekoorb.android.booklibrary.ui.adapter;
 
 import android.databinding.BindingAdapter;
 import android.view.View;
