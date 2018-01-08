@@ -20,6 +20,7 @@ import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.BookListFragmentBinding;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 import uk.co.dekoorb.android.booklibrary.ui.adapter.BookAdapter;
+import uk.co.dekoorb.android.booklibrary.ui.dialog.AddBookDialogFragment;
 import uk.co.dekoorb.android.booklibrary.viewmodel.BookListViewModel;
 
 /**
@@ -31,6 +32,8 @@ public class BookListFragment extends Fragment {
 
     public static final String TAG = "BookListFragment";
 
+    public static final String ADD_DIALOG_TAG = "add_dialog_tag";
+
     private BookAdapter mBookAdapter;
     private BookListFragmentBinding mBinding;
     private BookListViewModel mViewModel;
@@ -39,7 +42,6 @@ public class BookListFragment extends Fragment {
 
     public interface BookListActionsListener {
         void onBookSelected(Book book);
-        void onAddBookClicked();
     }
 
     public BookListFragment() {
@@ -141,7 +143,8 @@ public class BookListFragment extends Fragment {
     private final View.OnClickListener fabAddListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mListener.onAddBookClicked();
+            new AddBookDialogFragment()
+                    .show(getFragmentManager(), ADD_DIALOG_TAG);
         }
     };
 }

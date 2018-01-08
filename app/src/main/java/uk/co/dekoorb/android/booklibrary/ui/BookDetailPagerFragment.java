@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +27,12 @@ import uk.co.dekoorb.android.booklibrary.viewmodel.BookDetailPagerViewModel;
  * create an instance of this fragment.
  */
 public class BookDetailPagerFragment extends Fragment {
-    private static final String TAG = "BookDetailPagerFragment";
-
     private static final String ARG_BOOK_ID = "book_id";
     public static final String STATE_CURRENT_POS = "current_pos";
 
-    private int mCurrentBook = -1;
     private long mBookId;
+    private int mCurrentPagerPos = -1;
+
     private BookDetailPagerFragmentBinding mBinding;
     private BookPagerAdapter mPagerAdapter;
     private BookDetailPagerViewModel mViewModel;
@@ -62,18 +62,17 @@ public class BookDetailPagerFragment extends Fragment {
         if (savedInstanceState == null) {
             mBookId = getArguments().getLong(ARG_BOOK_ID);
         } else {
-            mCurrentBook = savedInstanceState.getInt(STATE_CURRENT_POS, 0);
+            mCurrentPagerPos = savedInstanceState.getInt(STATE_CURRENT_POS, 0);
         }
-        Log.d(TAG, "onCreate: pos=" + mCurrentBook);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         mPagerAdapter = new BookPagerAdapter(getChildFragmentManager());
         mBinding = DataBindingUtil.inflate(inflater, R.layout.book_detail_pager_fragment, container, false);
         mBinding.bookViewpager.setAdapter(mPagerAdapter);
+        mBinding.bookViewpager.addOnPageChangeListener(pageChangeListener);
         return mBinding.getRoot();
     }
 
@@ -89,19 +88,16 @@ public class BookDetailPagerFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Book> books) {
                 if (books != null) {
-                    // Don't like this -- there must be a better way of getting the position
-                    // for the current book.
-                    if (mCurrentBook == -1) {
+                    if (mCurrentPagerPos == -1) {
                         for (int i = 0; i < books.size(); ++i) {
                             if (books.get(i).getId() == mBookId) {
-                                mCurrentBook = i;
+                                mCurrentPagerPos = i;
                                 break;
                             }
                         }
                     }
-                    Log.d(TAG, "onChanged: pos=" + mCurrentBook);
                     mPagerAdapter.setBooksList(books);
-                    mBinding.bookViewpager.setCurrentItem(mCurrentBook, false);
+                    mBinding.bookViewpager.setCurrentItem(mCurrentPagerPos, false);
                 }
             }
         });
@@ -110,8 +106,21 @@ public class BookDetailPagerFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mCurrentBook = mBinding.bookViewpager.getCurrentItem();
-        outState.putInt(STATE_CURRENT_POS, mCurrentBook);
-        Log.d(TAG, "onSaveInstanceState: pos=" + mCurrentBook);
+        mCurrentPagerPos = mBinding.bookViewpager.getCurrentItem();
+        outState.putInt(STATE_CURRENT_POS, mCurrentPagerPos);
     }
+
+    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+            mCurrentPagerPos = position;
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+
+        @Override
+        public void onPageScrollStateChanged(int state) {}
+    };
 }

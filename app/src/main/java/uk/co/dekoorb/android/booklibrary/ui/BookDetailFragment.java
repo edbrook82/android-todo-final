@@ -3,18 +3,22 @@ package uk.co.dekoorb.android.booklibrary.ui;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.BookDetailFragmentBinding;
 import uk.co.dekoorb.android.booklibrary.db.entity.Book;
+import uk.co.dekoorb.android.booklibrary.ui.dialog.EditBookDialogFragment;
 import uk.co.dekoorb.android.booklibrary.viewmodel.BookDetailViewModel;
 
 /**
@@ -87,7 +91,8 @@ public class BookDetailFragment extends Fragment {
     private View.OnClickListener fabEditListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d(TAG, "fabEditOnClick:" + mBookId);
+            EditBookDialogFragment.newInstance(mBookId)
+                    .show(getFragmentManager(), EditBookDialogFragment.TAG);
         }
     };
 }

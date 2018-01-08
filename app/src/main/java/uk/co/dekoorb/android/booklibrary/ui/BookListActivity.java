@@ -11,9 +11,6 @@ import uk.co.dekoorb.android.booklibrary.ui.dialog.AddBookDialogFragment;
 public class BookListActivity extends AppCompatActivity
         implements BookListFragment.BookListActionsListener {
 
-    private static final String TAG = "BookListActivity";
-    public static final String ADD_DIALOG_TAG = "add_dialog_tag";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +29,5 @@ public class BookListActivity extends AppCompatActivity
         long bookId = book.getId();
         Intent detailIntent = BookDetailActivity.getIntent(this, bookId);
         startActivity(detailIntent);
-    }
-
-    @Override
-    public void onAddBookClicked() {
-        new AddBookDialogFragment()
-                .show(getSupportFragmentManager(), ADD_DIALOG_TAG);
     }
 }
