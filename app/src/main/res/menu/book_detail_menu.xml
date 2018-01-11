@@ -9,6 +9,12 @@
         app:showAsAction="ifRoom|withText" />
 
     <item
+        android:id="@+id/action_search_amazon"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/amazon"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
         android:id="@+id/action_edit"
         android:icon="@android:drawable/ic_menu_edit"
         android:title="@string/edit"

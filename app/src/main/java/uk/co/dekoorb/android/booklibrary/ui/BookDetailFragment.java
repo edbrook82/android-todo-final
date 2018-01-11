@@ -4,17 +4,22 @@ package uk.co.dekoorb.android.booklibrary.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import uk.co.dekoorb.android.booklibrary.R;
 import uk.co.dekoorb.android.booklibrary.databinding.BookDetailFragmentBinding;
@@ -40,6 +45,7 @@ public class BookDetailFragment extends Fragment {
 
     public interface BookDetailFragmentActions {
         void onBookDeleted();
+        void onSearchAmazon(String title);
     }
 
     public BookDetailFragment() {
@@ -98,6 +104,9 @@ public class BookDetailFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_toggle_read:
                 mViewModel.toggleRead(mBinding.getBook());
+                break;
+            case R.id.action_search_amazon:
+                mListener.onSearchAmazon(mBinding.getBook().getTitle());
                 break;
             case R.id.action_edit:
                 editBook();

@@ -2,8 +2,13 @@ package uk.co.dekoorb.android.booklibrary.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import uk.co.dekoorb.android.booklibrary.R;
 
@@ -36,5 +41,20 @@ public class BookDetailActivity extends AppCompatActivity implements BookDetailF
     @Override
     public void onBookDeleted() {
         onBackPressed();
+    }
+
+    @Override
+    public void onSearchAmazon(String title) {
+        String base_url = "https://www.amazon.co.uk/s/ref=nb_sb_noss_2?url=search-alias%3Dstripbooks&field-keywords=";
+        try {
+            String url = base_url + URLEncoder.encode(title, "utf-8");
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+            browserIntent.setData(Uri.parse(url));
+            if(browserIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(browserIntent);
+            }
+        } catch (UnsupportedEncodingException e) {
+            Toast.makeText(this, "Could not access Amazon?", Toast.LENGTH_SHORT).show();
+        }
     }
 }

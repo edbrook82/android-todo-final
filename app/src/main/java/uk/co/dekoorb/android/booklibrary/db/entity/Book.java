@@ -1,6 +1,7 @@
 package uk.co.dekoorb.android.booklibrary.db.entity;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -18,6 +19,7 @@ public class Book {
 
     public Book() {}
 
+    @Ignore
     public Book(String title, String author, String description, boolean hasRead) {
         this.title = title;
         this.author = author;
