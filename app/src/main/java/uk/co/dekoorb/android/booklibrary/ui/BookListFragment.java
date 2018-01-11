@@ -10,6 +10,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +80,7 @@ public class BookListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
         subscribeUI();
+        setSwipeToDelete();
     }
 
     private void subscribeUI() {
@@ -93,6 +96,17 @@ public class BookListFragment extends Fragment {
                 mBinding.executePendingBindings();
             }
         });
+    }
+
+    private void setSwipeToDelete() {
+        SwipeToDeleteCallback callback = new SwipeToDeleteCallback(getContext()) {
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                mViewModel.deleteBookAtPos(viewHolder.getAdapterPosition());
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(mBinding.booksList);
     }
 
     private final BookClickCallback mBookClickCallback = new BookClickCallback() {

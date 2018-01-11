@@ -40,4 +40,11 @@ public class BookListViewModel extends AndroidViewModel {
             }
         }.execute(book);
     }
+
+    public void deleteBookAtPos(int pos) {
+        List<Book> books = mBookList.getValue();
+        if (books != null) {
+            deleteBook(books.get(pos));
+        }
+    }
 }
