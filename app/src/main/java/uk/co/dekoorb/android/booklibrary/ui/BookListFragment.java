@@ -46,7 +46,6 @@ public class BookListFragment extends Fragment {
 
     public BookListFragment() {
         // Required empty public constructor
-//        setHasOptionsMenu(true);
     }
 
     public static BookListFragment newInstance() {
@@ -123,22 +122,6 @@ public class BookListFragment extends Fragment {
                     .show();
         }
     };
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.book_list_menu, menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.:
-//                break;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//        return false;
-//    }
 
     private final View.OnClickListener fabAddListener = new View.OnClickListener() {
         @Override

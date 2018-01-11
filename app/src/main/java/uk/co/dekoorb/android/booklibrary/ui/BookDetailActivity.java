@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import uk.co.dekoorb.android.booklibrary.R;
 
-public class BookDetailActivity extends AppCompatActivity {
+public class BookDetailActivity extends AppCompatActivity implements BookDetailFragment.BookDetailFragmentActions {
 
     public static final String EXTRA_BOOK_ID = "BookDetailActivity.EXTRA_BOOK_ID";
 
@@ -31,5 +31,10 @@ public class BookDetailActivity extends AppCompatActivity {
                         .commit();
             }
         }
+    }
+
+    @Override
+    public void onBookDeleted() {
+        onBackPressed();
     }
 }

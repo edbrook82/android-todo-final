@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,8 +36,15 @@ public class BookDetailFragment extends Fragment {
     private BookDetailViewModel mViewModel;
     private BookDetailFragmentBinding mBinding;
 
+    private BookDetailFragmentActions mListener;
+
+    public interface BookDetailFragmentActions {
+        void onBookDeleted();
+    }
+
     public BookDetailFragment() {
         // Required empty public constructor
+        setHasOptionsMenu(true);
     }
 
     /**
@@ -71,6 +79,40 @@ public class BookDetailFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (BookDetailFragmentActions) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement BookDetailFragmentActions");
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.book_detail_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_toggle_read:
+                mViewModel.toggleRead(mBinding.getBook());
+                break;
+            case R.id.action_edit:
+                editBook();
+                break;
+            case R.id.action_delete:
+                mViewModel.deleteBook(mBinding.getBook());
+                mListener.onBookDeleted();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(BookDetailViewModel.class);
@@ -91,8 +133,12 @@ public class BookDetailFragment extends Fragment {
     private View.OnClickListener fabEditListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            EditBookDialogFragment.newInstance(mBookId)
-                    .show(getFragmentManager(), EditBookDialogFragment.TAG);
+            editBook();
         }
     };
+
+    private void editBook() {
+            EditBookDialogFragment.newInstance(mBookId)
+                    .show(getFragmentManager(), EditBookDialogFragment.TAG);
+    }
 }
