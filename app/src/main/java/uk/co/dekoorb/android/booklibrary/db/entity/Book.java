@@ -69,4 +69,17 @@ public class Book {
     public String toString() {
         return id + "-" + title;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Book)) {
+            return false;
+        }
+        Book b = (Book) obj;
+        return b.getId() == this.getId() &&
+                b.getTitle().equals(this.getTitle()) &&
+                b.getAuthor().equals(this.getAuthor()) &&
+                b.getDescription().equals(this.getDescription()) &&
+                b.isRead() == this.isRead();
+    }
 }
