@@ -18,7 +18,7 @@ import uk.co.dekoorb.android.booklibrary.db.entity.Book;
 
 @Dao
 public interface BookDao {
-    @Query("SELECT * FROM books")
+    @Query("SELECT * FROM books ORDER BY title ASC")
     LiveData<List<Book>> getAllBooks();
 
     @Query("SELECT * FROM books")

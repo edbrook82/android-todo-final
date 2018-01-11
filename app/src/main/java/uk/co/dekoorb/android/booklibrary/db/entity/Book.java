@@ -16,6 +16,15 @@ public class Book {
     private String description;
     private boolean hasRead;
 
+    public Book() {}
+
+    public Book(String title, String author, String description, boolean hasRead) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.hasRead = hasRead;
+    }
+
     public long getId() {
         return id;
     }
