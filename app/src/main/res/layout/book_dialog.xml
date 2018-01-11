@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="@={book.read}"
-            android:text="@string/have_read" />
+            android:text="@string/have_read"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
     </LinearLayout>
 </layout>
