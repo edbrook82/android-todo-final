@@ -17,11 +17,11 @@ import uk.co.dekoorb.android.todolibrary.ui.TodoClickCallback;
  * Created by ed on 04/01/18.
  */
 
-public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
+public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoViewHolder> {
     private List<Todo> mTodoList;
     private TodoClickCallback mTodoClickCallback;
 
-    public TodoAdapter(TodoClickCallback callback) {
+    public TodoListAdapter(TodoClickCallback callback) {
         mTodoClickCallback = callback;
     }
 

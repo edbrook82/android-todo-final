@@ -21,7 +21,7 @@ import java.util.List;
 import uk.co.dekoorb.android.todolibrary.R;
 import uk.co.dekoorb.android.todolibrary.databinding.TodoListFragmentBinding;
 import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
-import uk.co.dekoorb.android.todolibrary.ui.adapter.TodoAdapter;
+import uk.co.dekoorb.android.todolibrary.ui.adapter.TodoListAdapter;
 import uk.co.dekoorb.android.todolibrary.ui.dialog.AddTodoDialogFragment;
 import uk.co.dekoorb.android.todolibrary.viewmodel.TodoListViewModel;
 
@@ -36,7 +36,7 @@ public class TodoListFragment extends Fragment {
 
     public static final String ADD_DIALOG_TAG = "add_dialog_tag";
 
-    private TodoAdapter mTodoAdapter;
+    private TodoListAdapter mTodoListAdapter;
     private TodoListFragmentBinding mBinding;
     private TodoListViewModel mViewModel;
 
@@ -67,10 +67,10 @@ public class TodoListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mTodoAdapter = new TodoAdapter(mTodoClickCallback);
+        mTodoListAdapter = new TodoListAdapter(mTodoClickCallback);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.todo_list_fragment, container, false);
         mBinding.setIsLoading(true);
-        mBinding.todosList.setAdapter(mTodoAdapter);
+        mBinding.todosList.setAdapter(mTodoListAdapter);
         mBinding.fabAdd.setOnClickListener(fabAddListener);
         return mBinding.getRoot();
     }
@@ -89,7 +89,7 @@ public class TodoListFragment extends Fragment {
             public void onChanged(@Nullable List<Todo> todos) {
                 if (todos != null) {
                     mBinding.setIsLoading(false);
-                    mTodoAdapter.setTodoList(todos);
+                    mTodoListAdapter.setTodoList(todos);
                 } else {
                     mBinding.setIsLoading(true);
                 }
