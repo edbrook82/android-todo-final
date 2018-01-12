@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_toggle_read"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="@string/read"
+        android:id="@+id/action_toggle_complete"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="@string/complete"
         app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/action_search_amazon"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/amazon"
+        android:title="@string/google"
         app:showAsAction="ifRoom|withText" />
 
     <item

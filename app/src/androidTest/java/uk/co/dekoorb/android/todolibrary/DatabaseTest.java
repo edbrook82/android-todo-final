@@ -33,13 +33,10 @@ public class DatabaseTest {
     private AppDatabase mDb;
 
     private static long sId = 1234;
-    private static String sTitle = "The Colour of Magic";
-    private static String sAuthor = "Terry Pratchett";
-    private static String sDescr = "The story takes place on the Discworld, a planet-sized flat disc carried " +
-            "through space on the backs of four huge elephants – Berilia, Tubul, Great T'Phon " +
-            "and Jerakeen – who themselves stand on the shell of Great A'Tuin, a gigantic sea " +
-            "turtle.";
-    private static boolean sHasRead = true;
+    private static String sTitle = "Android Application";
+    private static String sDescr = "Create an Android application to store a collection of Todo items. " +
+            "It should provide CRUD operations. If possible use MVVM & write some tests.";
+    private static boolean sCompleted = true;
 
     @Before
     public void createDb() {
@@ -63,7 +60,7 @@ public class DatabaseTest {
     @Test
     public void updateTodoInDb() throws Exception {
         Todo todo = createNewTodo();
-        todo.setRead(false);
+        todo.setComplete(false);
         mTodoDao.updateTodos(todo);
         Todo todoFromDb = getValue(mTodoDao.getTodo(sId));
         assertThat(todoFromDb, equalTo(todo));
@@ -78,7 +75,7 @@ public class DatabaseTest {
     }
 
     private Todo createNewTodo() {
-        Todo todo = new Todo(sTitle, sAuthor, sDescr, sHasRead);
+        Todo todo = new Todo(sTitle, sDescr, sCompleted);
         todo.setId(sId);
         mTodoDao.addTodos(todo);
         return todo;

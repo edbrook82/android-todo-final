@@ -24,21 +24,9 @@
             android:text="@{todo.title}"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/todo_has_read"
+            app:layout_constraintRight_toLeftOf="@+id/todo_completed"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
-
-        <TextView
-            android:id="@+id/todo_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@{todo.author}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/todo_title"
-            tools:text="Author" />
 
         <TextView
             android:id="@+id/todo_description"
@@ -55,23 +43,23 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/todo_author"
+            app:layout_constraintTop_toBottomOf="@+id/todo_title"
             app:layout_constraintVertical_bias="1.0"
             tools:text="Description" />
 
         <ImageView
-            android:id="@+id/todo_has_read"
+            android:id="@+id/todo_completed"
             android:layout_width="50dp"
             android:layout_height="0dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            android:contentDescription="@string/todo_has_been_read"
+            android:contentDescription="@string/todo_has_been_completed"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_check_black_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/todo_author"
+            app:layout_constraintBottom_toBottomOf="@+id/todo_title"
             android:layout_marginBottom="0dp"
-            app:visibleGone="@{todo.read}"
+            app:visibleGone="@{todo.complete}"
             app:layout_constraintVertical_bias="0.0" />
 
         <android.support.design.widget.FloatingActionButton

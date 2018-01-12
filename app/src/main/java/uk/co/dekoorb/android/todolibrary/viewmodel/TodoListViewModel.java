@@ -16,7 +16,6 @@ import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
  */
 
 public class TodoListViewModel extends AndroidViewModel {
-    private static final String DATABASE_NAME = "todos_database";
 
     private final AppDatabase mDb;
     private final LiveData<List<Todo>> mTodoList;

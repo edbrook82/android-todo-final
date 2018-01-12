@@ -18,7 +18,7 @@ import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
 
 @Dao
 public interface TodoDao {
-    @Query("SELECT * FROM todos ORDER BY title ASC")
+    @Query("SELECT * FROM todos")
     LiveData<List<Todo>> getAllTodos();
 
     @Query("SELECT * FROM todos")
@@ -27,7 +27,7 @@ public interface TodoDao {
     @Query("SELECT * FROM todos WHERE id = :id")
     LiveData<Todo> getTodo(long id);
 
-    @Query("SELECT * FROM todos WHERE hasRead = 1")
+    @Query("SELECT * FROM todos WHERE complete = 1")
     LiveData<List<Todo>> getTodosRead();
 
     @Insert

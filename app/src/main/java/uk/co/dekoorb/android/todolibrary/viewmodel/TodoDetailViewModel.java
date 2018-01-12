@@ -27,7 +27,7 @@ public class TodoDetailViewModel extends AndroidViewModel {
     }
 
     public void toggleRead(Todo todo) {
-        todo.setRead(!todo.isRead());
+        todo.setComplete(!todo.isComplete());
         new AsyncTask<Todo, Void, Void>() {
             @Override
             protected Void doInBackground(Todo... todos) {

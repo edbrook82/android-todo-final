@@ -63,7 +63,7 @@ public class TodoListActivity extends AppCompatActivity
             @Override
             protected Void doInBackground(Void... voids) {
                 for (int i=0; i<10; ++i) {
-                    Todo todo = new Todo(i + " " + genString(2), genString(3), genString(40), Math.random()>0.5);
+                    Todo todo = new Todo(i + " " + genString(2), genString(40), Math.random()>0.5);
                     db.todoDao().addTodos(todo);
                 }
                 return null;

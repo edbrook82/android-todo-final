@@ -23,16 +23,6 @@
             android:text="@={todo.title}" />
 
         <EditText
-            android:id="@+id/todo_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/author"
-            android:inputType="textCapWords|textPersonName"
-            android:maxLines="1"
-            android:text="@={todo.author}" />
-
-        <EditText
             android:id="@+id/todo_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,11 +33,11 @@
             tools:inputType="textCapSentences|textMultiLine" />
 
         <Switch
-            android:id="@+id/todo_read"
+            android:id="@+id/todo_complete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="@={todo.read}"
-            android:text="@string/have_read"
+            android:checked="@={todo.complete}"
+            android:text="@string/complete"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
     </LinearLayout>
 </layout>

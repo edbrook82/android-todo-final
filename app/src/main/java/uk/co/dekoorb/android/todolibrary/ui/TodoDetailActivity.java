@@ -44,8 +44,8 @@ public class TodoDetailActivity extends AppCompatActivity implements TodoDetailF
     }
 
     @Override
-    public void onSearchAmazon(String title) {
-        String base_url = "https://www.amazon.co.uk/s/ref=nb_sb_noss_2?url=search-alias%3Dstriptodos&field-keywords=";
+    public void onSearchGoogle(String title) {
+        String base_url = "https://www.google.co.uk/search?q=";
         try {
             String url = base_url + URLEncoder.encode(title, "utf-8");
             Intent browserIntent = new Intent(Intent.ACTION_VIEW);
@@ -54,7 +54,7 @@ public class TodoDetailActivity extends AppCompatActivity implements TodoDetailF
                 startActivity(browserIntent);
             }
         } catch (UnsupportedEncodingException e) {
-            Toast.makeText(this, "Could not access Amazon?", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Could not access Google?", Toast.LENGTH_SHORT).show();
         }
     }
 }

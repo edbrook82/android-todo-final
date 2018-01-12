@@ -13,18 +13,16 @@ public class Todo {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String title;
-    private String author;
     private String description;
-    private boolean hasRead;
+    private boolean complete;
 
     public Todo() {}
 
     @Ignore
-    public Todo(String title, String author, String description, boolean hasRead) {
+    public Todo(String title, String description, boolean complete) {
         this.title = title;
-        this.author = author;
         this.description = description;
-        this.hasRead = hasRead;
+        this.complete = complete;
     }
 
     public long getId() {
@@ -43,14 +41,6 @@ public class Todo {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -59,12 +49,12 @@ public class Todo {
         this.description = description;
     }
 
-    public boolean isRead() {
-        return hasRead;
+    public boolean isComplete() {
+        return complete;
     }
 
-    public void setRead(boolean hasRead) {
-        this.hasRead = hasRead;
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     @Override
@@ -80,8 +70,7 @@ public class Todo {
         Todo b = (Todo) obj;
         return b.getId() == this.getId() &&
                 b.getTitle().equals(this.getTitle()) &&
-                b.getAuthor().equals(this.getAuthor()) &&
                 b.getDescription().equals(this.getDescription()) &&
-                b.isRead() == this.isRead();
+                b.isComplete() == this.isComplete();
     }
 }
