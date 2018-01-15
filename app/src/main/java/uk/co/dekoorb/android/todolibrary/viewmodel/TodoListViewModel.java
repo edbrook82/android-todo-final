@@ -15,14 +15,11 @@ import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
  * Created by ed on 04/01/18.
  */
 
-public class TodoListViewModel extends AndroidViewModel {
-
-    private final AppDatabase mDb;
+public class TodoListViewModel extends BaseViewModel {
     private final LiveData<List<Todo>> mTodoList;
 
     public TodoListViewModel(Application app) {
         super(app);
-        mDb = ((BaseApp)app).getAppDb();
         mTodoList = mDb.todoDao().getAllTodos();
     }
 

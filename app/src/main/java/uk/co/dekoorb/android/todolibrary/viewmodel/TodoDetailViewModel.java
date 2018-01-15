@@ -14,12 +14,9 @@ import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
  * Created by ed on 05/01/18.
  */
 
-public class TodoDetailViewModel extends AndroidViewModel {
-    private final AppDatabase mDb;
-
+public class TodoDetailViewModel extends BaseViewModel {
     public TodoDetailViewModel(Application app) {
         super(app);
-        mDb = ((BaseApp) app).getAppDb();
     }
 
     public LiveData<Todo> getTodo(long id) {

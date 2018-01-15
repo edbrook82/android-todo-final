@@ -12,7 +12,8 @@ import java.net.URLEncoder;
 
 import uk.co.dekoorb.android.todolibrary.R;
 
-public class TodoDetailActivity extends AppCompatActivity implements TodoDetailFragment.TodoDetailFragmentActions {
+public class TodoDetailActivity extends AppCompatActivity
+        implements TodoDetailFragment.TodoDetailFragmentActions {
 
     public static final String EXTRA_TODO_ID = "TodoDetailActivity.EXTRA_TODO_ID";
 

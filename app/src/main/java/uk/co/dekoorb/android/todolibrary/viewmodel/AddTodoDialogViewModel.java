@@ -12,13 +12,11 @@ import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
  * Created by edbrook on 07/01/2018.
  */
 
-public class AddTodoDialogViewModel extends AndroidViewModel {
-    private final AppDatabase mDb;
+public class AddTodoDialogViewModel extends BaseViewModel {
     private Todo mTodo;
 
     public AddTodoDialogViewModel(Application app) {
         super(app);
-        mDb = ((BaseApp) app).getAppDb();
         mTodo = new Todo();
     }
 

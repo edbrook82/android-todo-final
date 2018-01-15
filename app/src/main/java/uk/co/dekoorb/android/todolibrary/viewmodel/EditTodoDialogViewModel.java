@@ -13,12 +13,10 @@ import uk.co.dekoorb.android.todolibrary.db.entity.Todo;
  * Created by edbrook on 07/01/2018.
  */
 
-public class EditTodoDialogViewModel extends AndroidViewModel {
-    private final AppDatabase mDb;
+public class EditTodoDialogViewModel extends BaseViewModel {
 
     public EditTodoDialogViewModel(Application app) {
         super(app);
-        mDb = ((BaseApp) app).getAppDb();
     }
 
     public LiveData<Todo> getTodo(long id) {
